@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
+import java.util.List;
 
 public class FindBeerActivity extends AppCompatActivity {
+
+    private BeerExpert expert = new BeerExpert();
 
 
     @Override
@@ -23,6 +26,10 @@ public class FindBeerActivity extends AppCompatActivity {
         Spinner color = (Spinner) findViewById(R.id.color);
         String beerType = String.valueOf(color.getSelectedItem());
 
-        brands.setText(beerType);
+        // Get recommendations from the BeerExpert class
+        List<String> recommendationList = expert.getBrands(beerType);
+        String recommendations = String.join(", ", recommendationList);
+
+        brands.setText(recommendations);
     }
 }
